@@ -3,11 +3,11 @@ import http from 'http';
 import ora from 'ora';
 
 import * as IOE from 'fp-ts/lib/IOEither';
-import { mapErrorToMpgError, MgpError } from '../errors';
+import { mapErrorToMpgError, MpgError } from '../errors';
 
 const parseError = mapErrorToMpgError('Http');
 
-export function createHttpServer(html: string): IOE.IOEither<MgpError, void> {
+export function createHttpServer(html: string): IOE.IOEither<MpgError, void> {
   return IOE.tryCatch(
     () => {
       ora('Preview available on http://127.0.0.1:8080').start();

@@ -8,11 +8,11 @@ import { getConfig } from './modules/config';
 import { displayBanner, displayError } from './modules/display';
 import { displayMenu, MenuEntry } from './modules/questions';
 import { compileTemplate, saveTemplateFile } from './modules/template';
-import { MgpError } from './modules/errors';
+import { MpgError } from './modules/errors';
 import { createHttpServer } from './modules/http';
 
 const program = Do(TE.taskEither)
-  .do(TE.rightIO<MgpError, void>(displayBanner()))
+  .do(TE.rightIO<MpgError, void>(displayBanner()))
   .bind('config', TE.rightTask(getConfig()))
   .bindL('template', ({ config }) => compileTemplate(config))
   .bind('menu', TE.rightTask(displayMenu()))

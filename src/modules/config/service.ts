@@ -38,7 +38,7 @@ function encodeImage(file: string): string {
 function getExtraConfig(): T.Task<MpgExtraConfig> {
   const files = fs.readdirSync(process.cwd());
 
-  const getImage = (name: string) => pipe(findImage(files, name), O.map(encodeImage), O.toNullable);
+  const getImage = (name: string): string | null => pipe(findImage(files, name), O.map(encodeImage), O.toNullable);
 
   const logo = getImage('logo');
   const background = getImage('background');
