@@ -19,6 +19,7 @@ export const defaultMpgConfigFile: MpgConfigFile = {
 export interface MpgExtraConfig {
   background: string | null;
   logo: string | null;
+  style: string | null;
 }
 
 export type MpgConfig = MpgConfigFile & MpgExtraConfig;

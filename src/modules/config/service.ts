@@ -1,5 +1,6 @@
 import * as A from 'fp-ts/lib/Array';
 import * as T from 'fp-ts/lib/Task';
+import * as TE from 'fp-ts/lib/TaskEither';
 import * as O from 'fp-ts/lib/Option';
 import { defaultMpgConfigFile, MpgConfig, MpgConfigFile, MpgExtraConfig } from './model';
 import fs from 'fs';
@@ -8,14 +9,39 @@ import { Do } from 'fp-ts-contrib/lib/Do';
 
 import mimetypes from 'mime-types';
 
-function getConfigFile(): T.Task<MpgConfigFile> {
+function getFile(name: string): T.Task<O.Option<string>> {
   try {
-    const buf = fs.readFileSync('mpg.config.json', 'utf8');
+    const buf = fs.readFileSync(name, 'utf8');
 
-    return T.of(JSON.parse(buf.toString()));
+    return T.of(O.some(buf.toString()));
   } catch (e) {
-    return T.of(defaultMpgConfigFile);
+    return T.of(O.none);
   }
+}
+
+function getConfigFile(): T.Task<MpgConfigFile> {
+  return pipe(
+    getFile('mpg.config.json'),
+    T.chain(content =>
+      pipe(
+        content,
+        O.fold(
+          () => TE.left('Not found'),
+          c => {
+            try {
+              return TE.right(JSON.parse(c));
+            } catch (e) {
+              return TE.left('Error during parsing');
+            }
+          },
+        ),
+      ),
+    ),
+    TE.fold(
+      () => T.of(defaultMpgConfigFile),
+      content => T.of(content),
+    ),
+  );
 }
 
 const extensions = ['svg', 'png', 'jpeg', 'jpg'];
@@ -43,10 +69,14 @@ function getExtraConfig(): T.Task<MpgExtraConfig> {
   const logo = getImage('logo');
   const background = getImage('background');
 
-  return T.of({
-    logo,
-    background,
-  });
+  return pipe(
+    getFile('style.css'),
+    T.map(style => ({
+      logo,
+      background,
+      style: O.toNullable(style),
+    })),
+  );
 }
 
 export function getConfig(): T.Task<MpgConfig> {
@@ -62,5 +92,6 @@ export function getConfig(): T.Task<MpgConfig> {
       },
       background: extra.background,
       logo: extra.logo,
+      style: extra.style,
     }));
 }
