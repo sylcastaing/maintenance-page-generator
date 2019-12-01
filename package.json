@@ -1,0 +1,49 @@
+{
+  "name": "maintenance-page-generator",
+  "version": "0.1.0",
+  "description": "Maintenance page generator",
+  "main": "./lib/index.js",
+  "bin": {
+    "maintenance-page-generator": "./lib/index.js",
+    "mpg": "./lib/index.js"
+  },
+  "scripts": {
+    "start": "tsnd --respawn --no-notify src/index.ts",
+    "test": "npm run build && npm i -g && maintenance-page-generator",
+    "build": "tsc --skipLibCheck -p .",
+    "format": "prettier --write \"src/**/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylcastaing/maintenance-page-generator.git"
+  },
+  "author": "Sylvain Castaing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sylcastaing/maintenance-page-generator/issues"
+  },
+  "homepage": "https://github.com/sylcastaing/maintenance-page-generator#readme",
+  "dependencies": {
+    "inquirer": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "6.5.0",
+    "@types/node": "12.12.14",
+    "husky": "3.1.0",
+    "lint-staged": "9.5.0",
+    "prettier": "1.19.1",
+    "ts-node-dev": "1.0.0-pre.44",
+    "typescript": "3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
