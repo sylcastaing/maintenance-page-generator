@@ -1,0 +1,5 @@
+export enum MenuEntry {
+  TEST_PAGE = 'TEST_PAGE',
+  GENERATE_FILE = 'GENERATE_FILE',
+  GENERATE_DOCKER = 'GENERATE_DOCKER',
+}

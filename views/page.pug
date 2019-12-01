@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    title #{meta.title}
+
+    if meta.description
+      meta(name="description" content=meta.description)
+
+    meta(charset="UTF-8")
+
+    style(type="text/css")
+      include styles/reset.css
+      include styles/style.css
+
+    if background
+      style(type="text/css").
+        body {
+          background: url(#{background}) no-repeat center center;
+          background-size: cover;
+        }
+
+  body
+    .container
+      .content
+        if logo
+          img.logo(src=logo)
+
+        h1.title #{title}
+        .text
+          p #{description}

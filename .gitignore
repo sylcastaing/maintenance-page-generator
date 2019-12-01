@@ -65,3 +65,4 @@ typings/
 dist
 lib
 tsconfig.tsbuildinfo
+mpg.config.json
