@@ -1,0 +1,11 @@
+.idea
+.vscode
+node_modules
+.github
+src
+.eslintrc.js
+.prettierrc
+mpg.config.json
+renovate.json
+tsconfig.json
+tsconfig.tsbuildinfo

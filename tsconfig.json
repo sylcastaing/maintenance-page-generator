@@ -4,7 +4,6 @@
     "module": "commonjs",
     "incremental": true,
     "lib": ["es2017"],
-    "declaration": true,
     "removeComments": true,
     "outDir": "lib",
     "rootDir": "src",
