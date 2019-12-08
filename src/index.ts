@@ -10,6 +10,7 @@ import { displayMenu, MenuEntry } from './modules/questions';
 import { compileTemplate, saveTemplateFile } from './modules/template';
 import { MpgError } from './modules/errors';
 import { createHttpServer } from './modules/http';
+import { generateDockerImage } from './modules/docker';
 
 const program = Do(TE.taskEither)
   .do(TE.rightIO<MpgError, void>(displayBanner()))
@@ -17,12 +18,13 @@ const program = Do(TE.taskEither)
   .bindL('template', ({ config }) => compileTemplate(config))
   .bind('menu', TE.rightTask(displayMenu()))
   .doL(({ menu, template }) => {
-    if (MenuEntry.TEST_PAGE === menu) {
-      return TE.fromIOEither(createHttpServer(template));
-    } else if (MenuEntry.GENERATE_FILE === menu) {
-      return saveTemplateFile(template);
-    } else {
-      return TE.left({ module: 'Template', message: 'azeaze' });
+    switch (menu) {
+      case MenuEntry.TEST_PAGE:
+        return TE.fromIOEither(createHttpServer(template));
+      case MenuEntry.GENERATE_FILE:
+        return saveTemplateFile(template);
+      case MenuEntry.GENERATE_DOCKER:
+        return generateDockerImage(template);
     }
   })
   .return(res => res);

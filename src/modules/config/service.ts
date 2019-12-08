@@ -8,6 +8,7 @@ import { pipe } from 'fp-ts/lib/pipeable';
 import { Do } from 'fp-ts-contrib/lib/Do';
 
 import mimetypes from 'mime-types';
+import { CONFIG_FILE_NAME } from '../../constants';
 
 function getFile(name: string): T.Task<O.Option<string>> {
   try {
@@ -21,7 +22,7 @@ function getFile(name: string): T.Task<O.Option<string>> {
 
 function getConfigFile(): T.Task<MpgConfigFile> {
   return pipe(
-    getFile('mpg.config.json'),
+    getFile(CONFIG_FILE_NAME),
     T.chain(content =>
       pipe(
         content,

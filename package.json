@@ -27,6 +27,7 @@
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator#readme",
   "dependencies": {
     "chalk": "3.0.0",
+    "execa": "^3.4.0",
     "figlet": "1.2.4",
     "fp-ts": "2.2.0",
     "fp-ts-contrib": "^0.1.7",
@@ -34,7 +35,7 @@
     "mime-types": "2.1.25",
     "ora": "4.0.3",
     "pug": "2.0.4",
-    "yup": "0.27.0"
+    "rimraf": "3.0.0"
   },
   "devDependencies": {
     "@types/figlet": "1.2.0",
@@ -42,7 +43,7 @@
     "@types/mime-types": "2.1.0",
     "@types/node": "12.12.14",
     "@types/pug": "2.0.4",
-    "@types/yup": "0.26.26",
+    "@types/rimraf": "2.0.3",
     "@typescript-eslint/eslint-plugin": "2.10.0",
     "@typescript-eslint/parser": "2.10.0",
     "eslint": "6.7.2",
