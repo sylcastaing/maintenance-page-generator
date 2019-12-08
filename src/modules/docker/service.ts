@@ -1,4 +1,5 @@
 import * as TE from 'fp-ts/lib/TaskEither';
+import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { constVoid } from 'fp-ts/lib/function';
 
@@ -11,6 +12,7 @@ import rimraf from 'rimraf';
 import util from 'util';
 import * as fs from 'fs';
 import * as path from 'path';
+import { MpgConfig } from '../config';
 
 const mapError = mapErrorToMpgError('Docker');
 const mapUnknownError = (err: unknown): MpgError => mapError(err as Error);
@@ -55,13 +57,24 @@ function createNginxConf(): MpgTask<void> {
 }
 
 function createHtmlFile(template: string): MpgTask<void> {
-  return writeFile(`${DOCKER_BUILD_FOLDER}/maintenance.html`, template);
+  return writeFile(`${DOCKER_BUILD_FOLDER}/index.html`, template);
 }
 
-function generateBuildFolder(template: string): MpgTask<void> {
+function createFavicon(config: MpgConfig): MpgTask<void> {
+  return pipe(
+    O.fromNullable(config.favicon),
+    O.fold(
+      () => TE.right(constVoid()),
+      favicon => writeFile(`${DOCKER_BUILD_FOLDER}/favicon.ico`, favicon),
+    ),
+  );
+}
+
+function generateBuildFolder(config: MpgConfig, template: string): MpgTask<void> {
   return pipe(
     removeBuildFolder(),
     TE.chain(createBuildFolder),
+    TE.chain(() => createFavicon(config)),
     TE.chain(() => createHtmlFile(template)),
     TE.chain(createDockerFile),
     TE.chain(createNginxConf),
@@ -86,6 +99,6 @@ function buildDockerImage(): MpgTask<void> {
   );
 }
 
-export function generateDockerImage(template: string): MpgTask<void> {
-  return pipe(generateBuildFolder(template), TE.chain(buildDockerImage), TE.chain(removeBuildFolder));
+export function generateDockerImage(config: MpgConfig, template: string): MpgTask<void> {
+  return pipe(generateBuildFolder(config, template), TE.chain(buildDockerImage), TE.chain(removeBuildFolder));
 }

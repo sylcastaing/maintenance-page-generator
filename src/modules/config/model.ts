@@ -17,6 +17,7 @@ export const defaultMpgConfigFile: MpgConfigFile = {
 };
 
 export interface MpgExtraConfig {
+  favicon: Buffer | null;
   background: string | null;
   logo: string | null;
   style: string | null;

@@ -17,14 +17,14 @@ const program = Do(TE.taskEither)
   .bind('config', TE.rightTask(getConfig()))
   .bindL('template', ({ config }) => compileTemplate(config))
   .bind('menu', TE.rightTask(displayMenu()))
-  .doL(({ menu, template }) => {
+  .doL(({ menu, template, config }) => {
     switch (menu) {
       case MenuEntry.TEST_PAGE:
         return TE.fromIOEither(createHttpServer(template));
       case MenuEntry.GENERATE_FILE:
         return saveTemplateFile(template);
       case MenuEntry.GENERATE_DOCKER:
-        return generateDockerImage(template);
+        return generateDockerImage(config, template);
     }
   })
   .return(res => res);
