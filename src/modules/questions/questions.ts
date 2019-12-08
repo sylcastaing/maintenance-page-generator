@@ -30,3 +30,11 @@ export const fileNameQuestions: QuestionCollection<{ fileName: string }> = [
     message: 'Enter a filename (default: maintenance.html)',
   },
 ];
+
+export const dockerImageNameQuestions: QuestionCollection<{ imageName: string }> = [
+  {
+    type: 'input',
+    name: 'imageName',
+    message: 'Enter and image name (default: maintenance:latest)',
+  },
+];

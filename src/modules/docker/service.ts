@@ -13,6 +13,7 @@ import util from 'util';
 import * as fs from 'fs';
 import * as path from 'path';
 import { MpgConfig } from '../config';
+import { displayDockerImageNameQuestion } from '../questions';
 
 const mapError = mapErrorToMpgError('Docker');
 const mapUnknownError = (err: unknown): MpgError => mapError(err as Error);
@@ -81,8 +82,8 @@ function generateBuildFolder(config: MpgConfig, template: string): MpgTask<void>
   );
 }
 
-function buildDockerImage(): MpgTask<void> {
-  const executor = execa('docker', ['build', DOCKER_BUILD_FOLDER, '-t', 'maintenance:latest']);
+function buildDockerImage(imageName: string): MpgTask<void> {
+  const executor = execa('docker', ['build', DOCKER_BUILD_FOLDER, '-t', imageName]);
 
   executor.stdout?.pipe(process.stdout);
 
@@ -100,5 +101,10 @@ function buildDockerImage(): MpgTask<void> {
 }
 
 export function generateDockerImage(config: MpgConfig, template: string): MpgTask<void> {
-  return pipe(generateBuildFolder(config, template), TE.chain(buildDockerImage), TE.chain(removeBuildFolder));
+  return pipe(
+    generateBuildFolder(config, template),
+    TE.chain(() => TE.rightTask(displayDockerImageNameQuestion())),
+    TE.chain(imageName => buildDockerImage(imageName)),
+    TE.chain(removeBuildFolder),
+  );
 }

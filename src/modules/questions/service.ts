@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 
 import { MenuEntry } from './model';
 
-import { fileNameQuestions, mainMenuQuestions } from './questions';
+import { dockerImageNameQuestions, fileNameQuestions, mainMenuQuestions } from './questions';
 
 import * as T from 'fp-ts/lib/Task';
 import * as O from 'fp-ts/lib/Option';
@@ -25,6 +25,20 @@ export function displayFileNameQuestion(): T.Task<string> {
         O.fromNullable(res.fileName),
         O.filter(name => name !== ''),
         O.getOrElse(() => 'maintenance.html'),
+      ),
+    ),
+  );
+}
+
+export function displayDockerImageNameQuestion(): T.Task<string> {
+  return pipe(
+    () => prompt(dockerImageNameQuestions),
+    T.map(res =>
+      pipe(
+        O.fromNullable(res.imageName),
+        O.filter(name => name !== ''),
+        O.map(name => (name.split(':').length < 2 ? `${name}:latest` : name)),
+        O.getOrElse(() => 'maintenance:latest'),
       ),
     ),
   );
