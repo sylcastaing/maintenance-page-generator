@@ -3,6 +3,7 @@
 ![image](https://user-images.githubusercontent.com/12694685/70395036-0afc1600-19fb-11ea-9139-b4cc0258b899.png)
 
 ## Installation
+
 ```bash
 npm i -g maintenance-page-generator
 ```
@@ -24,11 +25,11 @@ maintenance-page-generator
 
 Maintenance page is serve on http://localhost:8080.
 
-### Generate maintenance page
+#### Generate maintenance page
 
 Maintenance page is save on current directory.
 
-### Generate maintenance docker image
+#### Generate maintenance docker image
 
 Mpg build a nginx docker image to serve maintenance page.
 
@@ -50,3 +51,23 @@ To customize your maintenance page, you can create a **mpg.config.json** file wi
 ```
 
 All fields are optionals.
+
+### Add images
+
+You can add images to your directory
+
+- logo.{svg,png,jpg,jpeg}
+- background.{svg,png,jpg,jpeg}
+- favicon.ico (only for docker build)
+
+### Customize style
+
+You can add a stylesheet with name : **style.css**.
+
+Css selectors :
+
+- .container
+- .content
+- .logo
+- .title
+- .text
