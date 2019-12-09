@@ -1,7 +1,11 @@
 {
   "name": "maintenance-page-generator",
   "version": "0.1.1",
-  "description": "Maintenance page generator",
+  "description": "Simple maintenance page generator cli",
+  "keywords": [
+    "maintenance",
+    "cli"
+  ],
   "main": "./lib/index.js",
   "bin": {
     "maintenance-page-generator": "./lib/index.js",
