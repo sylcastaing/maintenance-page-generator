@@ -31,10 +31,10 @@
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator#readme",
   "dependencies": {
     "chalk": "3.0.0",
-    "execa": "^3.4.0",
+    "execa": "3.4.0",
     "figlet": "1.2.4",
     "fp-ts": "2.2.0",
-    "fp-ts-contrib": "^0.1.7",
+    "fp-ts-contrib": "0.1.7",
     "inquirer": "7.0.0",
     "mime-types": "2.1.25",
     "ora": "4.0.3",
