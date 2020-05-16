@@ -32,7 +32,5 @@ const program = Do(TE.taskEither)
 program().then(res => {
   if (EI.isLeft(res)) {
     displayError(res.left)();
-  } else {
-    //console.log(res.right);
   }
 });
