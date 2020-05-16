@@ -1,6 +1,6 @@
 {
   "name": "maintenance-page-generator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple maintenance page generator cli",
   "keywords": [
     "maintenance",
