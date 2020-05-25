@@ -38,7 +38,7 @@
     "inquirer": "7.1.0",
     "mime-types": "2.1.27",
     "ora": "4.0.4",
-    "pug": "2.0.4",
+    "pug": "3.0.0",
     "rimraf": "3.0.2"
   },
   "devDependencies": {
