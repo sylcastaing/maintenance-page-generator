@@ -31,7 +31,7 @@
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator#readme",
   "dependencies": {
     "chalk": "4.0.0",
-    "execa": "4.0.1",
+    "execa": "4.0.3",
     "figlet": "1.4.0",
     "fp-ts": "2.6.1",
     "fp-ts-contrib": "0.1.15",
