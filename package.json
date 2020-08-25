@@ -35,7 +35,7 @@
     "figlet": "1.4.0",
     "fp-ts": "2.6.1",
     "fp-ts-contrib": "0.1.15",
-    "inquirer": "7.1.0",
+    "inquirer": "7.3.3",
     "mime-types": "2.1.27",
     "ora": "4.0.4",
     "pug": "2.0.4",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/figlet": "1.2.0",
-    "@types/inquirer": "6.5.0",
+    "@types/inquirer": "7.3.1",
     "@types/mime-types": "2.1.0",
     "@types/node": "14.0.1",
     "@types/pug": "2.0.4",
