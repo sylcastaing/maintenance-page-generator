@@ -37,7 +37,7 @@
     "fp-ts-contrib": "0.1.15",
     "inquirer": "7.1.0",
     "mime-types": "2.1.27",
-    "ora": "4.0.4",
+    "ora": "4.1.1",
     "pug": "2.0.4",
     "rimraf": "3.0.2"
   },
