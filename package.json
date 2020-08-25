@@ -33,7 +33,7 @@
     "chalk": "4.0.0",
     "execa": "4.0.1",
     "figlet": "1.4.0",
-    "fp-ts": "2.6.1",
+    "fp-ts": "2.8.2",
     "fp-ts-contrib": "0.1.15",
     "inquirer": "7.1.0",
     "mime-types": "2.1.27",
