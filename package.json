@@ -34,7 +34,7 @@
     "execa": "4.0.1",
     "figlet": "1.4.0",
     "fp-ts": "2.6.1",
-    "fp-ts-contrib": "0.1.15",
+    "fp-ts-contrib": "0.1.18",
     "inquirer": "7.1.0",
     "mime-types": "2.1.27",
     "ora": "4.0.4",
