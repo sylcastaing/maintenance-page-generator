@@ -1,19 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "declaration": true,
+    "importHelpers": true,
     "module": "commonjs",
-    "incremental": true,
-    "lib": ["es2017"],
-    "removeComments": true,
     "outDir": "lib",
     "rootDir": "src",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true
+    "target": "es2017"
   },
-  "exclude": ["node_modules", "lib"]
+  "include": [
+    "src/**/*"
+  ]
 }

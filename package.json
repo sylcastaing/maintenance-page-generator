@@ -1,64 +1,78 @@
 {
   "name": "maintenance-page-generator",
-  "version": "0.1.2",
   "description": "Simple maintenance page generator cli",
-  "keywords": [
-    "maintenance",
-    "cli"
-  ],
-  "main": "./lib/index.js",
-  "bin": {
-    "maintenance-page-generator": "./lib/index.js",
-    "mpg": "./lib/index.js"
-  },
+  "version": "0.2.0",
+  "author": "Sylvain Castaing @sylcastaing",
+  "homepage": "https://github.com/sylcastaing/maintenance-page-generator",
+  "license": "MIT",
+  "main": "lib/index.js",
   "scripts": {
-    "start": "tsnd --respawn --no-notify src/index.ts",
-    "test": "npm run build && npm i -g && maintenance-page-generator",
-    "build": "tsc --skipLibCheck -p .",
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint src/**/*.ts --max-warnings=0",
     "lint:fix": "eslint src/**/*.ts --max-warnings=0 --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sylcastaing/maintenance-page-generator.git"
+  "bin": {
+    "maintenance-page-generator": "./bin/run",
+    "mpg": "./bin/run"
   },
-  "author": "Sylvain Castaing",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sylcastaing/maintenance-page-generator/issues"
-  },
-  "homepage": "https://github.com/sylcastaing/maintenance-page-generator#readme",
+  "bugs": "https://github.com/sylcastaing/maintenance-page-generator/issues",
   "dependencies": {
-    "chalk": "4.0.0",
-    "execa": "4.0.1",
-    "figlet": "1.4.0",
-    "fp-ts": "2.6.1",
-    "fp-ts-contrib": "0.1.15",
-    "inquirer": "7.1.0",
+    "@oclif/command": "1.8.0",
+    "@oclif/config": "1.17.0",
+    "@oclif/plugin-help": "3.2.0",
+    "fp-ts": "2.8.5",
+    "fp-ts-contrib": "0.1.21",
     "mime-types": "2.1.27",
-    "ora": "4.0.4",
-    "pug": "2.0.4",
-    "rimraf": "3.0.2"
+    "pug": "3.0.0",
+    "tslib": "2.0.3"
   },
   "devDependencies": {
-    "@types/figlet": "1.2.0",
-    "@types/inquirer": "6.5.0",
+    "@oclif/dev-cli": "1.22.2",
+    "@oclif/test": "1.2.7",
+    "@types/chai": "4.2.14",
     "@types/mime-types": "2.1.0",
-    "@types/node": "14.0.1",
+    "@types/mocha": "8.0.3",
+    "@types/node": "14.14.6",
     "@types/pug": "2.0.4",
-    "@types/rimraf": "3.0.0",
-    "@typescript-eslint/eslint-plugin": "2.33.0",
-    "@typescript-eslint/parser": "2.33.0",
-    "eslint": "7.0.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-prettier": "3.1.3",
-    "husky": "4.2.5",
-    "lint-staged": "10.2.2",
-    "prettier": "2.0.5",
-    "ts-node-dev": "1.0.0-pre.44",
-    "typescript": "3.9.2"
+    "chai": "4.2.0",
+    "eslint": "7.12.1",
+    "eslint-config-oclif": "3.1.0",
+    "eslint-config-oclif-typescript": "0.2.0",
+    "globby": "11.0.1",
+    "husky": "4.3.0",
+    "lint-staged": "10.5.0",
+    "mocha": "8.2.0",
+    "nyc": "15.1.0",
+    "prettier": "2.1.2",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.5"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "keywords": [
+    "oclif"
+  ],
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "maintenance-page-generator",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "sylcastaing/maintenance-page-generator",
+  "types": "lib/index.d.ts",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
