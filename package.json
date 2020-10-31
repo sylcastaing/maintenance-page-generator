@@ -27,6 +27,7 @@
     "@oclif/plugin-help": "3.2.0",
     "fp-ts": "2.8.5",
     "fp-ts-contrib": "0.1.21",
+    "livereload": "0.9.1",
     "mime-types": "2.1.27",
     "pug": "3.0.0",
     "tslib": "2.0.3"

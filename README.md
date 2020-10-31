@@ -19,7 +19,7 @@ $ npm install -g maintenance-page-generator
 $ maintenance-page-generator COMMAND
 running command...
 $ maintenance-page-generator (-v|--version|version)
-maintenance-page-generator/0.2.0 linux-x64 node-v14.15.0
+maintenance-page-generator/0.2.0 linux-x64 node-v12.19.0
 $ maintenance-page-generator --help [COMMAND]
 USAGE
   $ maintenance-page-generator COMMAND
@@ -28,28 +28,27 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`maintenance-page-generator hello [FILE]`](#maintenance-page-generator-hello-file)
+* [`maintenance-page-generator generate`](#maintenance-page-generator-generate)
 * [`maintenance-page-generator help [COMMAND]`](#maintenance-page-generator-help-command)
+* [`maintenance-page-generator preview`](#maintenance-page-generator-preview)
 
-## `maintenance-page-generator hello [FILE]`
+## `maintenance-page-generator generate`
 
-describe the command here
+generate an html maintenance page
 
 ```
 USAGE
-  $ maintenance-page-generator hello [FILE]
+  $ maintenance-page-generator generate
 
 OPTIONS
-  -f, --force
+  -f, --file=file  Destination html file name
   -h, --help       show CLI help
-  -n, --name=name  name to print
 
 EXAMPLE
-  $ maintenance-page-generator hello
-  hello world from ./src/hello.ts!
+  $ mpg generate
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0/src/commands/hello.ts)_
+_See code: [src/commands/generate.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0/src/commands/generate.ts)_
 
 ## `maintenance-page-generator help [COMMAND]`
 
@@ -67,4 +66,23 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `maintenance-page-generator preview`
+
+preview maintenance page in browser
+
+```
+USAGE
+  $ maintenance-page-generator preview
+
+OPTIONS
+  -h, --help                   show CLI help
+  -l, --livereload=livereload  [default: 35729] Livereload server port
+  -p, --port=port              [default: 8080] Server port
+
+EXAMPLE
+  $ mpg preview
+```
+
+_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0/src/commands/preview.ts)_
 <!-- commandsstop -->

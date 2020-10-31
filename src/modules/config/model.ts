@@ -21,6 +21,7 @@ export interface MpgExtraConfig {
   background: string | null;
   logo: string | null;
   style: string | null;
+  livereloadPort?: number;
 }
 
 export type MpgConfig = MpgConfigFile & MpgExtraConfig;
