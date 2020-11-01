@@ -9,19 +9,49 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Setup nodeJs to 14
+        uses: actions/setup-node@v1
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
+
+      - name: Extract package version
+        id: version
+        run: echo ::set-output name=version::$(npm run get-version --silent)
+
+      - name: Install npm dependencies
         run: npm install
-      - name: Build
+
+      - name: Build package
         run: npm run prepack
-      - name: Publish
+
+      - name: Publish package to npm
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags:
+            - sylcastaing/maintenance-page-generator:${{ steps.version.outputs.version }}
+            - sylcastaing/maintenance-page-generator:latest
+          build-args: |
+            version=${{ steps.version.outputs.version }}
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
