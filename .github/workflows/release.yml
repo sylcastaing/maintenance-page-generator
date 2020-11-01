@@ -46,9 +46,9 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:
-            - sylcastaing/maintenance-page-generator:${{ steps.version.outputs.version }}
-            - sylcastaing/maintenance-page-generator:latest
+          tags: |
+            sylcastaing/maintenance-page-generator:${{ steps.version.outputs.version }}
+            sylcastaing/maintenance-page-generator:latest
           build-args: |
             version=${{ steps.version.outputs.version }}
 
