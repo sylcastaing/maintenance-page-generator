@@ -28,27 +28,46 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`maintenance-page-generator generate`](#maintenance-page-generator-generate)
+* [`maintenance-page-generator build`](#maintenance-page-generator-build)
+* [`maintenance-page-generator docker`](#maintenance-page-generator-docker)
 * [`maintenance-page-generator help [COMMAND]`](#maintenance-page-generator-help-command)
 * [`maintenance-page-generator preview`](#maintenance-page-generator-preview)
 
-## `maintenance-page-generator generate`
+## `maintenance-page-generator build`
 
-generate an html maintenance page
+build an html maintenance page
 
 ```
 USAGE
-  $ maintenance-page-generator generate
+  $ maintenance-page-generator build
 
 OPTIONS
   -f, --file=file  Destination html file name
   -h, --help       show CLI help
 
 EXAMPLE
-  $ mpg generate
+  $ mpg build
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre10/src/commands/generate.ts)_
+_See code: [src/commands/build.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre10/src/commands/build.ts)_
+
+## `maintenance-page-generator docker`
+
+build a maintenance docker image
+
+```
+USAGE
+  $ maintenance-page-generator docker
+
+OPTIONS
+  -h, --help             show CLI help
+  -t, --tagName=tagName  Docker image tag name
+
+EXAMPLE
+  $ mpg docker
+```
+
+_See code: [src/commands/docker.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre10/src/commands/docker.ts)_
 
 ## `maintenance-page-generator help [COMMAND]`
 

@@ -9,10 +9,10 @@ import { writeFile } from '../modules/files';
 import * as TO from 'fp-ts-contrib/TaskOption';
 import { pipe } from 'fp-ts/function';
 
-export default class Generate extends Command {
-  static description = 'generate an html maintenance page';
+export default class Build extends Command {
+  static description = 'build an html maintenance page';
 
-  static examples = ['$ mpg generate'];
+  static examples = ['$ mpg build'];
 
   static flags = {
     help: flags.help({ char: 'h' }),
@@ -27,7 +27,7 @@ export default class Generate extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(Generate);
+    const { flags } = this.parse(Build);
 
     cli.action.start('Extracting configuration');
 

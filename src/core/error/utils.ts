@@ -13,7 +13,7 @@ export function mapMpgError(err: unknown): Error {
   return err as Error;
 }
 
-export function promiseToMpgTask<T>(fn: Lazy<Promise<T>>): MpgTask<T> {
+export function promiseToMpgTask<T, P extends Promise<T>>(fn: Lazy<P>): MpgTask<T> {
   return TE.tryCatch(fn, mapMpgError);
 }
 
