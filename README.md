@@ -9,9 +9,18 @@ Simple maintenance page generator cli
 [![License](https://img.shields.io/npm/l/maintenance-page-generator.svg)](https://github.com/sylcastaing/maintenance-page-generator/blob/master/package.json)
 
 <!-- toc -->
+* [Installation](#installation)
 * [Usage](#usage)
 * [Commands](#commands)
+* [Configuration](#configuration)
 <!-- tocstop -->
+# Installation
+```bash
+npm i -g maintenance-page-generator
+```
+
+You can now use `maintenance-page-generator` command or `mpg` alias command. 
+
 # Usage
 <!-- usage -->
 ```sh-session
@@ -105,3 +114,42 @@ EXAMPLE
 
 _See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre11/src/commands/preview.ts)_
 <!-- commandsstop -->
+
+# Configuration
+
+## Configuration file
+
+To customize your maintenance page, you can create a **mpg.config.json** file with some options.
+
+```json
+{
+  "title": "We'll be back soon !",
+  "description": "Sorry for the inconvenience but we’re performing some maintenance at the moment.",
+  "meta": {
+    "title": "Maintenance page",
+    "description": null
+  }
+}
+```
+
+All fields are optionals.
+
+## Add images
+
+You can add images to your directory
+
+- logo.{svg,png,jpg,jpeg}
+- background.{svg,png,jpg,jpeg}
+- favicon.ico (only for docker build)
+
+## Customize style
+
+You can add a stylesheet with name : **style.css**.
+
+Css selectors :
+
+- .container
+- .content
+- .logo
+- .title
+- .text
