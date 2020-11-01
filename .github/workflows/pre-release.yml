@@ -25,11 +25,11 @@ jobs:
         run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Pucker Docker builder image
+      - name: Build docker image
         uses: docker/build-push-action@v1
         with:
           push: true
-          tags: sylcastaing/mpg-builder:${{ steps.version.outputs.version }}
+          tags: ${{ steps.version.outputs.version }}
           build_args: |
             version=${{ steps.version.outputs.version }}
       - name: Create Release
