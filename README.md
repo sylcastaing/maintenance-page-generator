@@ -37,10 +37,35 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`maintenance-page-generator autocomplete [SHELL]`](#maintenance-page-generator-autocomplete-shell)
 * [`maintenance-page-generator build`](#maintenance-page-generator-build)
 * [`maintenance-page-generator docker`](#maintenance-page-generator-docker)
 * [`maintenance-page-generator help [COMMAND]`](#maintenance-page-generator-help-command)
 * [`maintenance-page-generator preview`](#maintenance-page-generator-preview)
+* [`maintenance-page-generator update [CHANNEL]`](#maintenance-page-generator-update-channel)
+
+## `maintenance-page-generator autocomplete [SHELL]`
+
+display autocomplete installation instructions
+
+```
+USAGE
+  $ maintenance-page-generator autocomplete [SHELL]
+
+ARGUMENTS
+  SHELL  shell type
+
+OPTIONS
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
+
+EXAMPLES
+  $ maintenance-page-generator autocomplete
+  $ maintenance-page-generator autocomplete bash
+  $ maintenance-page-generator autocomplete zsh
+  $ maintenance-page-generator autocomplete --refresh-cache
+```
+
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v0.2.0/src/commands/autocomplete/index.ts)_
 
 ## `maintenance-page-generator build`
 
@@ -113,6 +138,17 @@ EXAMPLE
 ```
 
 _See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre11/src/commands/preview.ts)_
+
+## `maintenance-page-generator update [CHANNEL]`
+
+update the maintenance-page-generator CLI
+
+```
+USAGE
+  $ maintenance-page-generator update [CHANNEL]
+```
+
+_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v1.3.10/src/commands/update.ts)_
 <!-- commandsstop -->
 
 # Configuration
