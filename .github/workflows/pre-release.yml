@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           push: true
-          tags: ${{ steps.version.outputs.version }}
+          tags: docker.pkg.github.com/sylcastaing/maintenance-page-generator/mpg-builder:${{ steps.version.outputs.version }}
           build_args: |
             version=${{ steps.version.outputs.version }}
       - name: Create Release
