@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches:
+    branches-ignore:
       - 'master'
     tags:
       - 'v*'
@@ -16,14 +16,24 @@ jobs:
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
+      - name: Get package version
+        id: version
+        run: echo ::set-output name=version::$(npm run get-version --silent)
       - name: Install dependencies
         run: npm install
       - name: Build
         run: npm run prepack
       - name: Publish
-        run: npm publish
+        run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Pucker Docker builder image
+        uses: docker/build-push-action@v1
+        with:
+          push: true
+          tags: sylcastaing/mpg-builder:${{ steps.version.outputs.version }}
+          build-args: |
+            version=${{ steps.version.outputs.version }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
@@ -32,5 +42,5 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          draft: true
-          prerelease: false
+          draft: false
+          prerelease: true

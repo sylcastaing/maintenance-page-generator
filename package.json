@@ -1,12 +1,13 @@
 {
   "name": "maintenance-page-generator",
   "description": "Simple maintenance page generator cli",
-  "version": "0.2.0",
+  "version": "0.2.0-pre1",
   "author": "Sylvain Castaing @sylcastaing",
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator",
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
+    "get-version": "echo $npm_package_version",
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
