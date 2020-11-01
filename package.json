@@ -1,6 +1,6 @@
 {
   "name": "maintenance-page-generator",
-  "version": "0.2.0-pre8",
+  "version": "0.2.0-pre9",
   "description": "Simple maintenance page generator cli",
   "author": "Sylvain Castaing @sylcastaing",
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator",
