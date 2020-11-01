@@ -9,28 +9,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Setup nodeJs to 14
+        uses: actions/setup-node@v1
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
-      - name: Get package version
+
+      - name: Extract package version
         id: version
         run: echo ::set-output name=version::$(npm run get-version --silent)
-      - name: Install dependencies
+
+      - name: Install npm dependencies
         run: npm install
-      - name: Build
+
+      - name: Build package
         run: npm run prepack
-      - name: Publish
+
+      - name: Publish package to npm
         run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v1
         with:
           registry: docker.pkg.github.com
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build docker image
         uses: docker/build-push-action@v2
         with:
@@ -38,7 +50,8 @@ jobs:
           tags: docker.pkg.github.com/sylcastaing/maintenance-page-generator/mpg-builder:${{ steps.version.outputs.version }}
           build-args: |
             version=${{ steps.version.outputs.version }}
-      - name: Create Release
+
+      - name: Create Pre Release
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
