@@ -19,7 +19,7 @@ $ npm install -g maintenance-page-generator
 $ maintenance-page-generator COMMAND
 running command...
 $ maintenance-page-generator (-v|--version|version)
-maintenance-page-generator/0.2.0-pre5 linux-x64 node-v14.15.0
+maintenance-page-generator/0.2.0-pre6 linux-x64 node-v14.15.0
 $ maintenance-page-generator --help [COMMAND]
 USAGE
   $ maintenance-page-generator COMMAND
@@ -48,7 +48,7 @@ EXAMPLE
   $ mpg generate
 ```
 
-_See code: [src/commands/generate.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre5/src/commands/generate.ts)_
+_See code: [src/commands/generate.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre6/src/commands/generate.ts)_
 
 ## `maintenance-page-generator help [COMMAND]`
 
@@ -84,5 +84,5 @@ EXAMPLE
   $ mpg preview
 ```
 
-_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre5/src/commands/preview.ts)_
+_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v0.2.0-pre6/src/commands/preview.ts)_
 <!-- commandsstop -->
