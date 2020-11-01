@@ -30,7 +30,7 @@ jobs:
         with:
           push: true
           tags: sylcastaing/mpg-builder:${{ steps.version.outputs.version }}
-          build-args: |
+          build_args: |
             version=${{ steps.version.outputs.version }}
       - name: Create Release
         id: create_release

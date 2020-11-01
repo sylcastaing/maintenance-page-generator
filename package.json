@@ -1,7 +1,7 @@
 {
   "name": "maintenance-page-generator",
+  "version": "0.2.0-pre2",
   "description": "Simple maintenance page generator cli",
-  "version": "0.2.0-pre1",
   "author": "Sylvain Castaing @sylcastaing",
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "@oclif/command": "1.8.0",
     "@oclif/config": "1.17.0",
     "@oclif/plugin-help": "3.2.0",
+    "cli-ux": "5.5.0",
     "fp-ts": "2.8.5",
     "fp-ts-contrib": "0.1.21",
     "livereload": "0.9.1",
@@ -73,7 +74,10 @@
       "@oclif/plugin-help"
     ]
   },
-  "repository": "sylcastaing/maintenance-page-generator",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylcastaing/maintenance-page-generator.git"
+  },
   "types": "lib/index.d.ts",
   "husky": {
     "hooks": {
