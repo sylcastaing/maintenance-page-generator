@@ -19,7 +19,7 @@ $ npm install -g maintenance-page-generator
 $ maintenance-page-generator COMMAND
 running command...
 $ maintenance-page-generator (-v|--version|version)
-maintenance-page-generator/0.2.0 linux-x64 node-v12.19.0
+maintenance-page-generator/0.2.0 linux-x64 node-v14.15.0
 $ maintenance-page-generator --help [COMMAND]
 USAGE
   $ maintenance-page-generator COMMAND
