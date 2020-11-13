@@ -32,9 +32,9 @@ html(lang="en")
         if logo
           img.logo(src=logo)
 
-        h1.title #{title}
+        h1.title !{title}
         .text
-          p #{description}
+          p !{description}
 
     if livereloadPort
       script.
