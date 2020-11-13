@@ -65,6 +65,11 @@ export function createPreviewHttpServer(port: number, livereloadPort: number) {
   http.createServer((req, res) => serverRouter(req, res, livereloadPort)).listen(port);
 
   livereload
-    .createServer({ port: livereloadPort, exts: ['json', 'svg', 'png', 'jpeg', 'jpg', 'css', 'ico'] })
+    .createServer({
+      port: livereloadPort,
+      exts: ['json', 'svg', 'png', 'jpeg', 'jpg', 'css', 'ico'],
+      applyCSSLive: false,
+      applyImgLive: false,
+    })
     .watch(process.cwd());
 }
