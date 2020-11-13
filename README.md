@@ -28,7 +28,7 @@ $ npm install -g maintenance-page-generator
 $ maintenance-page-generator COMMAND
 running command...
 $ maintenance-page-generator (-v|--version|version)
-maintenance-page-generator/1.0.0 linux-x64 node-v14.15.0
+maintenance-page-generator/1.1.0 linux-x64 node-v14.15.0
 $ maintenance-page-generator --help [COMMAND]
 USAGE
   $ maintenance-page-generator COMMAND
@@ -58,7 +58,7 @@ EXAMPLE
   $ mpg build
 ```
 
-_See code: [src/commands/build.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.0.0/src/commands/build.ts)_
+_See code: [src/commands/build.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.0/src/commands/build.ts)_
 
 ## `maintenance-page-generator docker`
 
@@ -76,7 +76,7 @@ EXAMPLE
   $ mpg docker
 ```
 
-_See code: [src/commands/docker.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.0.0/src/commands/docker.ts)_
+_See code: [src/commands/docker.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.0/src/commands/docker.ts)_
 
 ## `maintenance-page-generator help [COMMAND]`
 
@@ -112,7 +112,7 @@ EXAMPLE
   $ mpg preview
 ```
 
-_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.0.0/src/commands/preview.ts)_
+_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.0/src/commands/preview.ts)_
 <!-- commandsstop -->
 
 # Configuration
