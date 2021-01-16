@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as util from 'util';
+import * as path from 'path';
 
 import * as mimetypes from 'mime-types';
 
@@ -20,39 +21,39 @@ function getFile<T>(fn: Lazy<Promise<T>>): TO.TaskOption<T> {
   return pipe(TE.tryCatch(fn, identity), TO.fromTaskEither);
 }
 
-export function getFileContent(name: string): TO.TaskOption<string> {
-  return getFile(() => getFileFunction(name, 'utf8'));
+export function getFileContent(dir: string, name: string): TO.TaskOption<string> {
+  return getFile(() => getFileFunction(path.join(dir, name), 'utf8'));
 }
 
-export function getFileBuffer(name: string): TO.TaskOption<Buffer> {
-  return getFile(() => getFileFunction(name));
+export function getFileBuffer(dir: string, name: string): TO.TaskOption<Buffer> {
+  return getFile(() => getFileFunction(path.join(dir, name)));
 }
 
-export function getFileToBase64(name: string): TO.TaskOption<string> {
-  return getFile(() => getFileFunction(name, 'base64'));
+export function getFileToBase64(dir: string, name: string): TO.TaskOption<string> {
+  return getFile(() => getFileFunction(path.join(dir, name), 'base64'));
 }
 
-export function getDirContent(name: string): TO.TaskOption<Array<string>> {
+export function getDirContent(dir: string, name: string): TO.TaskOption<Array<string>> {
   return pipe(
-    TE.tryCatch(() => readDirFunction(name), identity),
+    TE.tryCatch(() => readDirFunction(path.join(process.cwd(), dir, name)), identity),
     TO.fromTaskEither,
   );
 }
 
-function getImageToBase64(name: string): TO.TaskOption<string> {
+function getImageToBase64(dir: string, name: string): TO.TaskOption<string> {
   return pipe(
-    getFileToBase64(name),
+    getFileToBase64(dir, name),
     TO.map(base64 => `data:${mimetypes.lookup(name)};base64,${base64}`),
   );
 }
 
-export function findImage(name: string, files: Array<string>): TO.TaskOption<string> {
+export function findImage(dir: string, name: string, files: Array<string>): TO.TaskOption<string> {
   return pipe(
     IMAGES_EXTENSIONS,
     A.map(extension => `${name}.${extension}`),
     A.findFirst(name => files.includes(name)),
     TO.fromOption,
-    TO.chain(getImageToBase64),
+    TO.chain(name => getImageToBase64(dir, name)),
   );
 }
 

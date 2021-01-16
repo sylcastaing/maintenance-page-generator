@@ -1,4 +1,5 @@
 import * as http from 'http';
+import * as path from 'path';
 import { pipe } from 'fp-ts/function';
 import { getConfig } from '../config';
 import { compileTemplate } from '../template/service';
@@ -11,9 +12,9 @@ import * as O from 'fp-ts/Option';
 import { getFileBuffer } from '../files';
 import { IncomingMessage, ServerResponse } from 'http';
 
-function templateRoute(res: ServerResponse, livereloadPort: number) {
+function templateRoute(res: ServerResponse, livereloadPort: number, dir: string) {
   pipe(
-    getConfig(),
+    getConfig(dir),
     T.chain(config => compileTemplate({ ...config, livereloadPort })),
     T.chainIOK(result => () => {
       if (EI.isRight(result)) {
@@ -26,9 +27,9 @@ function templateRoute(res: ServerResponse, livereloadPort: number) {
   )();
 }
 
-function faviconRoute(res: ServerResponse) {
+function faviconRoute(res: ServerResponse, dir: string) {
   pipe(
-    getFileBuffer('favicon.ico'),
+    getFileBuffer(dir, 'favicon.ico'),
     T.chainIOK(result => () => {
       if (O.isSome(result)) {
         res.writeHead(200, { 'Content-Type': 'image/x-icon' });
@@ -47,13 +48,13 @@ function notFoundRoute(res: ServerResponse) {
   res.end();
 }
 
-function serverRouter(req: IncomingMessage, res: ServerResponse, livereloadPort: number) {
+function serverRouter(req: IncomingMessage, res: ServerResponse, livereloadPort: number, dir: string) {
   switch (req.url) {
     case '/':
-      templateRoute(res, livereloadPort);
+      templateRoute(res, livereloadPort, dir);
       break;
     case '/favicon.ico':
-      faviconRoute(res);
+      faviconRoute(res, dir);
       break;
     default:
       notFoundRoute(res);
@@ -61,8 +62,8 @@ function serverRouter(req: IncomingMessage, res: ServerResponse, livereloadPort:
   }
 }
 
-export function createPreviewHttpServer(port: number, livereloadPort: number) {
-  http.createServer((req, res) => serverRouter(req, res, livereloadPort)).listen(port);
+export function createPreviewHttpServer(dir: string, port: number, livereloadPort: number) {
+  http.createServer((req, res) => serverRouter(req, res, livereloadPort, dir)).listen(port);
 
   livereload
     .createServer({
@@ -71,5 +72,5 @@ export function createPreviewHttpServer(port: number, livereloadPort: number) {
       applyCSSLive: false,
       applyImgLive: false,
     })
-    .watch(process.cwd());
+    .watch(path.join(process.cwd(), dir));
 }

@@ -9,10 +9,10 @@ import { constVoid, pipe } from 'fp-ts/function';
 import * as TE from 'fp-ts/TaskEither';
 import { getMpgVersion } from '../../core/version';
 
-export function buildDockerImage(tagName: string): MpgTask<void> {
+export function buildDockerImage(dir: string, tagName: string): MpgTask<void> {
   const executor = execa('docker', [
     'build',
-    process.cwd(),
+    path.join(process.cwd(), dir),
     '-t',
     tagName,
     '-f',

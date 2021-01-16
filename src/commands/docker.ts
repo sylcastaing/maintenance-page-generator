@@ -10,6 +10,14 @@ export default class Docker extends Command {
 
   static examples = ['$ mpg docker'];
 
+  static args = [
+    {
+      name: 'folder',
+      description: 'Configuration folder',
+      default: './',
+    },
+  ];
+
   static flags = {
     help: flags.help({ char: 'h' }),
     tagName: flags.string({ char: 't', description: 'Docker image tag name' }),
@@ -23,10 +31,10 @@ export default class Docker extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(Docker);
+    const { flags, args } = this.parse(Docker);
 
     const tagName = await this.getDestinationFileName(flags.tagName);
 
-    await runMpgTask(buildDockerImage(tagName));
+    await runMpgTask(buildDockerImage(args.folder, tagName));
   }
 }

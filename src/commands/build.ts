@@ -14,6 +14,14 @@ export default class Build extends Command {
 
   static examples = ['$ mpg build'];
 
+  static args = [
+    {
+      name: 'folder',
+      description: 'Configuration folder',
+      default: './',
+    },
+  ];
+
   static flags = {
     help: flags.help({ char: 'h' }),
     file: flags.string({ char: 'f', description: 'Destination html file name ' }),
@@ -27,11 +35,11 @@ export default class Build extends Command {
   }
 
   async run() {
-    const { flags } = this.parse(Build);
+    const { flags, args } = this.parse(Build);
 
     cli.action.start('Extracting configuration');
 
-    const config = await getConfig()();
+    const config = await getConfig(args.folder)();
 
     cli.action.stop('done');
 

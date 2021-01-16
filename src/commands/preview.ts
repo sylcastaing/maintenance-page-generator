@@ -8,6 +8,14 @@ export default class Preview extends Command {
 
   static examples = ['$ mpg preview'];
 
+  static args = [
+    {
+      name: 'folder',
+      description: 'Configuration folder',
+      default: './',
+    },
+  ];
+
   static flags = {
     help: flags.help({ char: 'h' }),
     port: flags.integer({ char: 'p', description: 'Server port', default: 8080 }),
@@ -15,13 +23,13 @@ export default class Preview extends Command {
   };
 
   async run() {
-    const { flags } = this.parse(Preview);
+    const { flags, args } = this.parse(Preview);
 
     cli.action.start(`Maintenance page preview is available on http://localhost:${flags.port}`, 'running', {
       stdout: true,
     });
 
-    createPreviewHttpServer(flags.port, flags.livereload);
+    createPreviewHttpServer(args.folder, flags.port, flags.livereload);
 
     await cli.open(`http://localhost:${flags.port}`);
   }
