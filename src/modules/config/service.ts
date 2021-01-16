@@ -1,19 +1,17 @@
 import { defaultMpgConfigFile, MpgConfig, MpgConfigFile, MpgExtraConfig } from './model';
 
-import { pipe } from 'fp-ts/function';
+import { identity, pipe } from 'fp-ts/function';
 import { findImage, getDirContent, getFileBuffer, getFileContent } from '../files';
 
 import * as T from 'fp-ts/Task';
 import * as TE from 'fp-ts/TaskEither';
 import * as TO from 'fp-ts-contrib/TaskOption';
 import * as IOE from 'fp-ts/IOEither';
-import * as O from 'fp-ts/Option';
-import { identity } from 'fp-ts/function';
 import { sequenceS } from 'fp-ts/Apply';
 
 const CONFIG_FILE_NAME = 'mpg.config.json';
 
-function getConfigFile(): T.Task<MpgConfigFile> {
+function getConfigFile(): T.Task<MpgConfigFile | null> {
   const parseConfigFile = (content: string): TO.TaskOption<MpgConfigFile> =>
     pipe(
       IOE.tryCatch(() => JSON.parse(content), identity),
@@ -21,11 +19,7 @@ function getConfigFile(): T.Task<MpgConfigFile> {
       TO.fromTaskEither,
     );
 
-  return pipe(
-    getFileContent(CONFIG_FILE_NAME),
-    TO.chain(parseConfigFile),
-    TO.getOrElse(() => T.of(defaultMpgConfigFile)),
-  );
+  return pipe(getFileContent(CONFIG_FILE_NAME), TO.chain(parseConfigFile), TO.toNullable);
 }
 
 function getExtraConfig(): T.Task<MpgExtraConfig> {
@@ -34,18 +28,13 @@ function getExtraConfig(): T.Task<MpgExtraConfig> {
     TO.getOrElse<Array<string>>(() => T.of([])),
     T.chain(files =>
       sequenceS(T.task)({
-        favicon: getFileBuffer('favicon.ico'),
-        background: findImage('background', files),
-        logo: findImage('logo', files),
-        style: getFileContent('style.css'),
+        favicon: TO.toNullable(getFileBuffer('favicon.ico')),
+        background: TO.toNullable(findImage('background', files)),
+        logo: TO.toNullable(findImage('logo', files)),
+        style: TO.toNullable(getFileContent('style.css')),
+        head: TO.toNullable(getFileContent('head.html')),
       }),
     ),
-    T.map(({ favicon, background, logo, style }) => ({
-      favicon: O.toNullable(favicon),
-      background: O.toNullable(background),
-      logo: O.toNullable(logo),
-      style: O.toNullable(style),
-    })),
   );
 }
 
@@ -60,12 +49,13 @@ export function getConfig(): T.Task<MpgConfig> {
       ...config,
       meta: {
         ...defaultMpgConfigFile.meta,
-        ...config.meta,
+        ...config?.meta,
       },
       favicon: extra.favicon,
       logo: extra.logo,
       background: extra.background,
       style: extra.style,
+      head: extra.head,
     })),
   );
 }

@@ -26,6 +26,9 @@ html(lang="en")
       style(type="text/css").
         #{style}
 
+    if head
+      | !{head}
+
   body
     .container
       .content

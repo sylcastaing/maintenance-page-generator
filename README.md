@@ -144,7 +144,7 @@ You can add images to your directory
 
 ## Customize style
 
-You can add a stylesheet with name : **style.css**.
+You can add a stylesheet : `style.css`.
 
 Css selectors :
 
@@ -153,3 +153,13 @@ Css selectors :
 - .logo
 - .title
 - .text
+
+## Customize html head
+
+You can add a `head.html` file with your custom head tags.
+
+Example : 
+
+```html
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet" />
+```

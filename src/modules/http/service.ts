@@ -67,7 +67,7 @@ export function createPreviewHttpServer(port: number, livereloadPort: number) {
   livereload
     .createServer({
       port: livereloadPort,
-      exts: ['json', 'svg', 'png', 'jpeg', 'jpg', 'css', 'ico'],
+      exts: ['json', 'svg', 'png', 'jpeg', 'jpg', 'css', 'ico', 'html'],
       applyCSSLive: false,
       applyImgLive: false,
     })
