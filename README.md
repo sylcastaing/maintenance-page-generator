@@ -28,7 +28,7 @@ $ npm install -g maintenance-page-generator
 $ maintenance-page-generator COMMAND
 running command...
 $ maintenance-page-generator (-v|--version|version)
-maintenance-page-generator/1.1.1 linux-x64 node-v14.15.0
+maintenance-page-generator/1.2.0-pre1 linux-x64 node-v14.15.4
 $ maintenance-page-generator --help [COMMAND]
 USAGE
   $ maintenance-page-generator COMMAND
@@ -37,18 +37,21 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`maintenance-page-generator build`](#maintenance-page-generator-build)
-* [`maintenance-page-generator docker`](#maintenance-page-generator-docker)
+* [`maintenance-page-generator build [FOLDER]`](#maintenance-page-generator-build-folder)
+* [`maintenance-page-generator docker [FOLDER]`](#maintenance-page-generator-docker-folder)
 * [`maintenance-page-generator help [COMMAND]`](#maintenance-page-generator-help-command)
-* [`maintenance-page-generator preview`](#maintenance-page-generator-preview)
+* [`maintenance-page-generator preview [FOLDER]`](#maintenance-page-generator-preview-folder)
 
-## `maintenance-page-generator build`
+## `maintenance-page-generator build [FOLDER]`
 
 build an html maintenance page
 
 ```
 USAGE
-  $ maintenance-page-generator build
+  $ maintenance-page-generator build [FOLDER]
+
+ARGUMENTS
+  FOLDER  [default: ./] Configuration folder
 
 OPTIONS
   -f, --file=file  Destination html file name
@@ -58,15 +61,18 @@ EXAMPLE
   $ mpg build
 ```
 
-_See code: [src/commands/build.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.1/src/commands/build.ts)_
+_See code: [src/commands/build.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.2.0-pre1/src/commands/build.ts)_
 
-## `maintenance-page-generator docker`
+## `maintenance-page-generator docker [FOLDER]`
 
 build a maintenance docker image
 
 ```
 USAGE
-  $ maintenance-page-generator docker
+  $ maintenance-page-generator docker [FOLDER]
+
+ARGUMENTS
+  FOLDER  [default: ./] Configuration folder
 
 OPTIONS
   -h, --help             show CLI help
@@ -76,7 +82,7 @@ EXAMPLE
   $ mpg docker
 ```
 
-_See code: [src/commands/docker.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.1/src/commands/docker.ts)_
+_See code: [src/commands/docker.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.2.0-pre1/src/commands/docker.ts)_
 
 ## `maintenance-page-generator help [COMMAND]`
 
@@ -93,15 +99,18 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.1/src/commands/help.ts)_
 
-## `maintenance-page-generator preview`
+## `maintenance-page-generator preview [FOLDER]`
 
 preview maintenance page in browser
 
 ```
 USAGE
-  $ maintenance-page-generator preview
+  $ maintenance-page-generator preview [FOLDER]
+
+ARGUMENTS
+  FOLDER  [default: ./] Configuration folder
 
 OPTIONS
   -h, --help                   show CLI help
@@ -112,7 +121,7 @@ EXAMPLE
   $ mpg preview
 ```
 
-_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.1.1/src/commands/preview.ts)_
+_See code: [src/commands/preview.ts](https://github.com/sylcastaing/maintenance-page-generator/blob/v1.2.0-pre1/src/commands/preview.ts)_
 <!-- commandsstop -->
 
 # Configuration
