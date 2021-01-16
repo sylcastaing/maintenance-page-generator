@@ -1,6 +1,6 @@
 {
   "name": "maintenance-page-generator",
-  "version": "1.2.0-pre1",
+  "version": "1.2.0",
   "description": "Simple maintenance page generator cli",
   "author": "Sylvain Castaing @sylcastaing",
   "homepage": "https://github.com/sylcastaing/maintenance-page-generator",
@@ -67,6 +67,11 @@
     "/oclif.manifest.json"
   ],
   "keywords": [
+    "maintenance",
+    "maintenance-page",
+    "maintenance-mode",
+    "cli",
+    "node-cli",
     "oclif"
   ],
   "oclif": {
